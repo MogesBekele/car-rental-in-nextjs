@@ -1,9 +1,17 @@
-import Image from "next/image";
+// src/app/page.tsx (or .jsx)
+"use client";
+
+import Navbar from "./components/Navbar/page";
+import Hero from "./components/Hero/page";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center>">
-      <h1 className="text-4xl font-bold text-center">Car Rental</h1>
-    </div>
+    <>
+      <Navbar />
+      {/* Your other components or content */}
+      <main>
+        <Hero />
+      </main>
+    </>
   );
 }
