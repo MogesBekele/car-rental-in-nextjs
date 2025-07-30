@@ -53,6 +53,7 @@ const Navbar = () => {
             height={32}
             className="h-8 w-auto"
             priority
+            
           />
         </motion.div>
       </Link>

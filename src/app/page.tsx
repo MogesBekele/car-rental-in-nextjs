@@ -4,6 +4,8 @@
 import Hero from "@/app/components/Hero";
 import Navbar from "@/app/components/Navbar";
 import FeatureSection from "@/app/components/FeatureSection";
+import Banner from "./components/Banner";
+import Footer from "./components/Footer";
 export default function Home() {
   return (
     <>
@@ -12,6 +14,8 @@ export default function Home() {
       <main>
         <Hero />
         <FeatureSection/>
+        <Banner/>
+        <Footer/>
       </main>
     </>
   );
