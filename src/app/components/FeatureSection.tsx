@@ -3,8 +3,7 @@ import { assets, dummyCarData } from "@/assets/assets";
 import Title from "@/app/components/Title";
 import CarCard from "@/app/components/CarCard";
 
-
-import { useAppContext } from "@/context/appContext";
+import { useAppContext } from "@/context/AppContext";
 import { motion } from "motion/react";
 
 const FeatureSection = () => {
@@ -15,7 +14,7 @@ const FeatureSection = () => {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-       viewport={{ once: true }}
+      viewport={{ once: true }}
       className="flex flex-col items-center py-24 px-6 md:px-16 lg:px-24 xl:px-32"
     >
       <motion.div

@@ -1,14 +1,15 @@
 "use client";
 import { assets, cityList } from "@/assets/assets";
 import { useState } from "react";
-import { useAppContext } from "@/context/appContext";
+import { useAppContext } from "@/context/AppContext";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 
 const Hero = () => {
   const [pickupLocation, setPickupLocation] = useState<string>("");
   const router = useRouter();
-  const { pickupDate, setPickupDate, returnDate, setReturnDate } = useAppContext();
+  const { pickupDate, setPickupDate, returnDate, setReturnDate } =
+    useAppContext();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

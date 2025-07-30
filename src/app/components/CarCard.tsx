@@ -1,5 +1,5 @@
 import { assets } from "@/assets/assets";
-import { useAppContext } from "@/context/appContext";
+import { useAppContext } from "@/context/AppContext";
 import type { Car } from "@/app/components/DataType/dataType";
 import { useRouter } from "next/navigation";
 
@@ -8,7 +8,7 @@ interface CarCardProps {
 }
 
 const CarCard = ({ car }: CarCardProps) => {
-  const { currency} = useAppContext();
+  const { currency } = useAppContext();
   const router = useRouter();
 
   return (

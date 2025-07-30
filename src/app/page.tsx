@@ -2,14 +2,14 @@
 "use client";
 
 import Hero from "@/app/components/Hero";
-import Navbar from "@/app/components/Navbar";
+
 import FeatureSection from "@/app/components/FeatureSection";
-import Banner from "./components/Banner";
-import Footer from "./components/Footer";
+import Banner from "@/app/components/Banner";
+import Footer from "@/app/components/Footer";
 export default function Home() {
   return (
     <>
-      <Navbar />
+     
       {/* Your other components or content */}
       <main>
         <Hero />
