@@ -31,7 +31,7 @@ const FeatureSection = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-18"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mt-18"
       >
         {dummyCarData.slice(0, 6).map((car) => (
           <motion.div

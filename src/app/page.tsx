@@ -2,20 +2,22 @@
 "use client";
 
 import Hero from "@/app/components/Hero";
-
 import FeatureSection from "@/app/components/FeatureSection";
 import Banner from "@/app/components/Banner";
 import Footer from "@/app/components/Footer";
+import Testimonail from "@/app/components/Testimonial";
+import NewsLetter from "@/app/components/NewsLetter";
 export default function Home() {
   return (
     <>
-     
       {/* Your other components or content */}
       <main>
         <Hero />
-        <FeatureSection/>
-        <Banner/>
-        <Footer/>
+        <FeatureSection />
+        <Banner />
+        <Testimonail />
+        <NewsLetter />
+        <Footer />
       </main>
     </>
   );

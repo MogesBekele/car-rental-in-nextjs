@@ -2,6 +2,7 @@ import { assets } from "@/assets/assets";
 import { useAppContext } from "@/context/AppContext";
 import type { Car } from "@/app/components/DataType/dataType";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface CarCardProps {
   car: Car;
@@ -20,10 +21,11 @@ const CarCard = ({ car }: CarCardProps) => {
       className="group rounded-xl overflow-hidden shadow-lg hover:-translate-y-1 transition-all duration-500 cursor-pointer"
     >
       <div className="relative h-48 overflow-hidden">
-        <img
+        <Image
           src={car.image}
           alt="car image"
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         {car.isAvailable && (
           <p className="absolute top-4 left-4 bg-primary/90 text-white text-xs px-2.5 rounded-full">
@@ -52,19 +54,43 @@ const CarCard = ({ car }: CarCardProps) => {
         </div>
         <div className="mt-4 grid grid-cols-2 gap-y-2 text-gray-600">
           <div className="flex items-center text-sm text-muted-foreground">
-            <img src={assets.users_icon} alt="" className="h-4 mr-2" />
+            <Image
+              src={assets.users_icon}
+              alt=""
+              width={16}
+              height={16}
+              className="mr-2"
+            />
             <span>{car.seating_capacity} Seats</span>
           </div>
           <div className="flex items-center text-sm text-muted-foreground">
-            <img src={assets.fuel_icon} alt="" className="h-4 mr-2" />
+            <Image
+              src={assets.fuel_icon}
+              alt=""
+              width={16}
+              height={16}
+              className="mr-2"
+            />
             <span>{car.fuel_type}</span>
           </div>
           <div className="flex items-center text-sm text-muted-foreground">
-            <img src={assets.car_icon} alt="" className="h-4 mr-2" />
+            <Image
+              src={assets.car_icon}
+              alt=""
+              width={16}
+              height={16}
+              className="mr-2"
+            />
             <span>{car.transmission}</span>
           </div>
           <div className="flex items-center text-sm text-muted-foreground">
-            <img src={assets.location_icon} alt="" className="h-4 mr-2" />
+            <Image
+              src={assets.location_icon}
+              alt=""
+              width={16}
+              height={16}
+              className="mr-2"
+            />
             <span>{car.location}</span>
           </div>
         </div>
