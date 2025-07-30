@@ -1,9 +1,9 @@
 // src/app/page.tsx (or .jsx)
 "use client";
 
-import Navbar from "./components/Navbar/page";
-import Hero from "./components/Hero/page";
-
+import Hero from "@/app/components/Hero";
+import Navbar from "@/app/components/Navbar";
+import FeatureSection from "@/app/components/FeatureSection";
 export default function Home() {
   return (
     <>
@@ -11,6 +11,7 @@ export default function Home() {
       {/* Your other components or content */}
       <main>
         <Hero />
+        <FeatureSection/>
       </main>
     </>
   );
