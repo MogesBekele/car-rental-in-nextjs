@@ -29,8 +29,9 @@ const Navbar = () => {
       } else {
         toast.error(data.message);
       }
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message || "Something went wrong");
+    } catch (error) {
+      console.error("Role change failed:", error);
+      toast.error("Failed to change role");
     }
   };
 

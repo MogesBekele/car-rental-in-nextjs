@@ -67,9 +67,9 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       } else {
         router.push("/");
       }
-    } catch (error: unknown) {
-      const err = error as any;
-      toast.error(err.response?.data?.message || "Something went wrong");
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+      toast.error("Failed to fetch user data");
     }
   };
 
@@ -79,9 +79,9 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       if (data.success) {
         setCars(data.cars);
       }
-    } catch (error: unknown) {
-      const err = error as any;
-      toast.error(err.response?.data?.message || "Something went wrong");
+    } catch (error) {
+      console.error(" Failed to fetch cars:", error);
+      toast.error("Failed to fetch cars");
     }
   };
 

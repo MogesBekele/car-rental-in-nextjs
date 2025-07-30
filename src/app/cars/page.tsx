@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams} from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/context/AppContext";
 import { assets } from "@/assets/assets";
