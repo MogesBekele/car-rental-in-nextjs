@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { assets } from "@/assets/assets";
+import { assets, dummyCarData } from "@/assets/assets";
 import { useEffect, useState } from "react";
 import type { Car } from "@/app/components/DataType/dataType";
 import Loading from "@/app/components/Loading";
@@ -48,8 +48,12 @@ const CarDetails = () => {
   };
 
   useEffect(() => {
-    const foundCar = cars.find((car) => car._id === id);
-    setCar(foundCar ?? null);
+    // const foundCar = cars.find((car) => car._id === id);
+    // setCar(foundCar ?? null);
+    setCar(dummyCarData.find((car) => car._id === id) || null);
+    if (!id) {
+      router.push("/");
+    }
   }, [id, cars]);
 
   return car ? (

@@ -1,6 +1,8 @@
+"use client";
 import { assets } from "@/assets/assets";
 import { motion } from "motion/react";
-
+import Image from "next/image";
+const MotionImage = motion(Image);
 //const socialLinks = [
 //   { href: "#", src: assets.facebook_logo, alt: "facebook" },
 //   { href: "#", src: assets.instagram_logo, alt: "instagram" },
@@ -33,11 +35,13 @@ const Footer = () => {
         className="flex flex-wrap justify-between items-start gap-8 pb-6 border-b border-borderColor"
       >
         <div>
-          <motion.img
+          <MotionImage
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             src={assets.logo}
+            width={150}
+            height={40}
             alt="logo"
             className=" h-8 md:h-9"
           />
@@ -59,25 +63,31 @@ const Footer = () => {
             className="flex items-center gap-3 mt-6"
           >
             <a href="#">
-              <img
+              <Image
                 src={assets.facebook_logo}
+
+                width={20}
+                height={20}
                 alt="facebook"
                 className="w-5 h-5"
               />
             </a>
             <a href="#">
-              <img src={assets.instagram_logo} alt="inta" className="w-5 h-5" />
+              <Image  width={20}
+                height={20} src={assets.instagram_logo} alt="inta" className="w-5 h-5" />
             </a>
 
             <a href="#">
-              <img
+              <Image  width={20}
+                height={20}
                 src={assets.twitter_logo}
                 alt="twitter"
                 className="w-5 h-5"
               />
             </a>
             <a href="#">
-              <img src={assets.gmail_logo} alt="email" className="w-5 h-5" />
+              <Image  width={20}
+                height={20}  src={assets.gmail_logo} alt="email" className="w-5 h-5" />
             </a>
           </motion.div>
         </div>

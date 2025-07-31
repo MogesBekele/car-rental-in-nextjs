@@ -4,7 +4,7 @@
 import Hero from "@/app/components/Hero";
 import FeatureSection from "@/app/components/FeatureSection";
 import Banner from "@/app/components/Banner";
-import Footer from "@/app/components/Footer";
+
 import Testimonail from "@/app/components/Testimonial";
 import NewsLetter from "@/app/components/NewsLetter";
 export default function Home() {
@@ -17,7 +17,6 @@ export default function Home() {
         <Banner />
         <Testimonail />
         <NewsLetter />
-        <Footer />
       </main>
     </>
   );
