@@ -47,7 +47,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   const currency = process.env.NEXT_PUBLIC_CURRENCY || "USD";
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
-  const [isOwner, setIsOwner] = useState(false);
+  const [isOwner, setIsOwner] = useState(true);
   const [showLogin, setShowLogin] = useState(false);
   const [pickupDate, setPickupDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
