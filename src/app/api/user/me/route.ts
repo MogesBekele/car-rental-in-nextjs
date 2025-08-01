@@ -1,11 +1,11 @@
 import { NextRequest } from "next/server";
 import connectDB from "@/lib/db";
-import { protect } from "@/lib/middleware/auth";
+import { getUserFromRequest } from "@/lib/auth";
 
 export const GET = async (req: NextRequest) => {
   await connectDB();
 
-  const auth = await protect(req);
+  const auth = await getUserFromRequest(req);
   if ("user" in auth) {
     return Response.json({ success: true, user: auth.user });
   }
