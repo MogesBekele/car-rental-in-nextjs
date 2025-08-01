@@ -6,21 +6,18 @@ const connectDB = async () => {
   if (isConnected) return;
 
   const uri = process.env.MONGODB_URI;
-  if (!uri) {
-    throw new Error("❌ MONGODB_URI not found in environment variables.");
-  }
+  if (!uri) throw new Error("❌ MONGODB_URI not found");
 
   try {
     await mongoose.connect(uri, {
-      dbName: "car-rental-in-nextjs",  // Optional: your database name
+      dbName: "car-rental-in-nextjs",
       bufferCommands: false,
     });
-
     isConnected = true;
     console.log("✅ MongoDB connected");
-  } catch (error) {
-    console.error("❌ MongoDB connection failed:", error);
-    throw new Error("MongoDB connection failed");
+  } catch (err) {
+    console.error("❌ MongoDB failed:", err);
+    throw new Error("MongoDB connection error");
   }
 };
 
