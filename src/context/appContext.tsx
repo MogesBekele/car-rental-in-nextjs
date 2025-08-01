@@ -127,7 +127,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     logout,
     axios,
     fetchUser,
-    ...router,
+    
   };
 
   return (
