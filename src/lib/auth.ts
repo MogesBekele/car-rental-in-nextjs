@@ -1,10 +1,11 @@
 // lib/auth.ts
-import { NextRequest } from "next/server";
+
+import type { NextApiRequest } from "next";
 import jwt from "jsonwebtoken";
 import User from "@/models/User";
 
-export async function getUserFromRequest(req: NextRequest) {
-  const authHeader = req.headers.get("authorization");
+export async function getUserFromRequest(req: NextApiRequest) {
+  const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) return null;
 
   const token = authHeader.split(" ")[1];

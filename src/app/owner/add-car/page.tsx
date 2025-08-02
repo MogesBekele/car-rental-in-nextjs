@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from "react";
 import Title from "@/app/components/owner/Title";
 import { assets } from "@/assets/assets";
@@ -46,12 +46,12 @@ const AddCar = () => {
 
     try {
       const formData = new FormData();
-      formData.append("image" , image!);
+      formData.append("image", image!);
       // Append all car details
       formData.append("carData", JSON.stringify(car));
 
       const { data } = await axios.post(
-        "http://localhost:3000/api/owner/add-Car",
+        "http://localhost:3000/api/owner/cars/add",
         formData
       );
 
@@ -262,8 +262,6 @@ const AddCar = () => {
             required
           />
         </div>
-
-    
 
         <button
           type="submit"
