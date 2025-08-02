@@ -1,24 +1,46 @@
+// src/lib/db.ts
 import mongoose from "mongoose";
 
-let isConnected = false;
+const MONGODB_URI = process.env.MONGODB_URI || "";
 
-const connectDB = async () => {
-  if (isConnected) return;
+if (!MONGODB_URI) {
+  throw new Error("Please define the MONGODB_URI environment variable inside .env.local");
+}
 
-  const uri = process.env.MONGODB_URI;
-  if (!uri) throw new Error("❌ MONGODB_URI not found");
+declare global {
+  // Declare a global variable for mongoose caching
+  // This avoids reinitializing connections on hot reload in dev
+  // eslint-disable-next-line no-var
+  var mongoose: {
+    conn: typeof mongoose | null;
+    promise: Promise<typeof mongoose> | null;
+  } | undefined;
+}
 
-  try {
-    await mongoose.connect(uri, {
-      dbName: "car-rental-in-nextjs",
-      bufferCommands: false,
-    });
-    isConnected = true;
-    console.log("✅ MongoDB connected");
-  } catch (err) {
-    console.error("❌ MongoDB failed:", err);
-    throw new Error("MongoDB connection error");
-  }
+// Initialize global.mongoose if not already initialized
+if (!global.mongoose) {
+  global.mongoose = { conn: null, promise: null };
+}
+
+// Type assertion to tell TS this is definitely not undefined now
+const cached = global.mongoose as {
+  conn: typeof mongoose | null;
+  promise: Promise<typeof mongoose> | null;
 };
+
+async function connectDB() {
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI).then((mongoose) => {
+      return mongoose;
+    });
+  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
 
 export default connectDB;

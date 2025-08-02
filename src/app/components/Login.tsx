@@ -7,8 +7,8 @@ const Login = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { setShowLogin, setToken, axios, } = useAppContext();
-  const router = useRouter()
+  const { setShowLogin, setToken, axios } = useAppContext();
+  const router = useRouter();
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     // const url =
@@ -51,10 +51,11 @@ const Login = () => {
         password,
       });
       if (data.success) {
-        router.push("/");
+        axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
         setToken(data.token);
         localStorage.setItem("token", data.token);
         setShowLogin(false);
+        router.push("/");
       } else {
         toast.error(data.message);
       }

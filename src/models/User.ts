@@ -1,26 +1,18 @@
-import mongoose, { Schema, Document, models } from "mongoose";
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
-// Optional: Add TypeScript type for User
-export interface IUser extends Document {
-  name: string;
-  email: string;
-  password: string;
-  role: "user" | "owner";
-  image?: string;
-}
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
 
-const userSchema = new Schema<IUser>(
-  {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    role: { type: String, enum: ["user", "owner"], default: "user" },
-    image: { type: String, default: "" },
-  },
-  { minimize: false, timestamps: true }
-);
+// hash password if changed
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
 
-// Prevent model overwrite in Next.js (due to HMR in dev)
-const User = models.User || mongoose.model<IUser>("User", userSchema);
-
-export default User;
+export default mongoose.models.User || mongoose.model("User", userSchema);
