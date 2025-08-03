@@ -11,45 +11,15 @@ const Login = () => {
   const router = useRouter();
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-    // const url =
-    //   state === "register"
-    //     ? "http://localhost:3000/api/user/register"
-    //     : "http://localhost:3000/api/user/login";
-
-    // const payload =
-    //   state === "register"
-    //     ? { name, email, password }
-    //     : { email, password };
-
-    // try {
-    //   const response = await fetch(url, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(payload),
-    //   });
-
-    //   const data = await response.json();
-
-    //   if (data.success) {
-    //     alert("Success!");
-    //     localStorage.setItem("token", data.token); // store JWT if needed
-    //     setShowLogin(false);
-    //   } else {
-    //     alert(data.message || "Something went wrong");
-    //   }
-    // } catch (error) {
-    //   console.error("Error:", error);
-    //   alert("Server error");
-    // }
+    e.preventDefault();
     try {
-      e.preventDefault();
-      const { data } = await axios.post(`/api/user/${state}`, {
-        name,
-        email,
-        password,
-      });
+      const payload =
+        state === "register" ? { name, email, password } : { email, password };
+
+      console.log("Logging in with password:", password);
+
+      const { data } = await axios.post(`/api/user/${state}`, payload);
+
       if (data.success) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
         setToken(data.token);
@@ -57,11 +27,17 @@ const Login = () => {
         setShowLogin(false);
         router.push("/");
       } else {
-        toast.error(data.message);
+        toast.error(data.message || "Something went wrong");
       }
-    } catch (error) {
-      console.error("Error:", error);
-      toast.error("Something went wrong, please try again later.");
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        // Safe access to error response data
+        console.error("❌ Axios error response:", error.response?.data);
+        toast.error(error.response?.data?.message || "Login failed");
+      } else {
+        console.error("❌ Unexpected error:", error);
+        toast.error("Login failed");
+      }
     }
   };
 

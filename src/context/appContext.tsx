@@ -45,7 +45,7 @@ export const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider = ({ children }: AppProviderProps) => {
   const router = useRouter();
   const currency = process.env.NEXT_PUBLIC_CURRENCY || "USD";
-  const [token, setToken] = useState<string | null>(null);
+ const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [isOwner, setIsOwner] = useState(true);
   const [showLogin, setShowLogin] = useState(false);
@@ -95,19 +95,22 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     toast.success("Logged out successfully");
   };
 
-  useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    setToken(storedToken);
-  }, []);
+ useEffect(() => {
+  const storedToken = localStorage.getItem("token");
+  console.log("Loaded token from localStorage:", storedToken);
+  setToken(storedToken);
+}, []);
 
-  useEffect(() => {
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-       console.log("Token being sent:", axios.defaults.headers.common["Authorization"]);
-      fetchUser();
-      fetchCars();
-    }
-  }, [token]);
+
+useEffect(() => {
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    console.log("Token being sent:", axios.defaults.headers.common["Authorization"]); // ✅ This
+    // fetchUser();
+    // fetchCars();
+  }
+}, [token]);
+
 
   const contextValue: AppContextType = {
     currency,

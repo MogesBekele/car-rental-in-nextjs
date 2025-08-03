@@ -1,31 +1,31 @@
-import { NextRequest, NextResponse } from "next/server";
-import connectDB from "@/lib/db";
+// pages/api/owner/change-role.ts
+import { NextApiResponse } from "next";
+import { protect } from "@/lib/auth";
 import User from "@/models/User";
-import { getUserFromRequest } from "@/lib/auth";
+import connectDB from "@/lib/db";
+import { NextApiRequestWithUser } from "@/types/nextApiRequestWithUser";
 
-export const PATCH = async (req: NextRequest) => {
-  await connectDB();
-
-  const user = await getUserFromRequest(req);
-  if (!user) {
-    return NextResponse.json(
-      { success: false, message: "Unauthorized" },
-      { status: 401 }
-    );
+async function handler(req: NextApiRequestWithUser, res: NextApiResponse) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ success: false, message: "Method not allowed" });
   }
 
   try {
-    await User.findByIdAndUpdate(user._id, { role: "owner" });
+    await connectDB();
 
-    return NextResponse.json({
-      success: true,
-      message: "Now you can control the dashboard",
-    });
+    const userId = req.user?._id; // ✅ safe optional chaining
+
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    await User.findByIdAndUpdate(userId, { role: "owner" });
+
+    return res.json({ success: true, message: "Now you can control the dashboard" });
   } catch (error) {
-    console.error("Error changing role:", error);
-    return NextResponse.json(
-      { success: false, message: 'Error changing role' },
-      { status: 500 }
-    );
+    console.error(error);
+    return res.status(500).json({ success: false, message: 'Server error' });
   }
-};
+}
+
+export default protect(handler);
