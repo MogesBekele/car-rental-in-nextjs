@@ -60,7 +60,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
   const fetchUser = async () => {
     try {
-      console.log("Token being sent:", axios.defaults.headers.common["Authorization"]);
+     
       const { data } = await axios.get("/api/user/data");
       if (data.success) {
         setUser(data.user);
@@ -103,6 +103,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+       console.log("Token being sent:", axios.defaults.headers.common["Authorization"]);
       fetchUser();
       fetchCars();
     }
