@@ -44,7 +44,7 @@ const Dashboard = () => {
       icon: assets.cautionIconColored,
     },
     {
-      title: "Comfirmed",
+      title: "Confirmed",
       value: data.completedBookings,
       icon: assets.listIconColored,
     },
