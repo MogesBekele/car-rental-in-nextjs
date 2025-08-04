@@ -11,7 +11,10 @@ export async function GET(req: NextRequest) {
 
     const authHeader = req.headers.get("authorization");
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+      return NextResponse.json(
+        { success: false, message: "Unauthorized" },
+        { status: 401 }
+      );
     }
 
     const token = authHeader.split(" ")[1];
@@ -19,12 +22,18 @@ export async function GET(req: NextRequest) {
 
     const user = await User.findById(decoded.userId).select("-password");
     if (!user) {
-      return NextResponse.json({ success: false, message: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { success: false, message: "User not found" },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json({ success: true, user });
   } catch (error) {
     console.error("Fetch user error:", error);
-    return NextResponse.json({ success: false, message: "Server error" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, message: "Server error" },
+      { status: 500 }
+    );
   }
 }
