@@ -4,9 +4,14 @@ import { verifyToken } from "@/lib/jwt";
 import Car from "@/models/Car";
 import Booking from "@/models/Booking";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== "GET") {
-    return res.status(405).json({ success: false, message: "Method Not Allowed" });
+    return res
+      .status(405)
+      .json({ success: false, message: "Method Not Allowed" });
   }
 
   try {
@@ -21,9 +26,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const decoded = verifyToken(token);
 
     const cars = await Car.find({ owner: decoded.userId });
-    const bookings = await Booking.find({ owner: decoded.userId }).populate("car");
-    const confirmed = bookings.filter(b => b.status === "confirmed");
-    const pending = bookings.filter(b => b.status === "pending");
+    const bookings = await Booking.find({ owner: decoded.userId }).populate(
+      "car"
+    );
+    const confirmed = bookings.filter((b) => b.status === "confirmed");
+    const pending = bookings.filter((b) => b.status === "pending");
 
     const dashboardData = {
       totalCars: cars.length,
