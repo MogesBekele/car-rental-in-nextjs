@@ -57,15 +57,19 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
   // ✅ Set baseURL only once
   if (!axios.defaults.baseURL) {
-    axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    axios.defaults.baseURL =
+      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   }
 
   // ✅ Fetch user data
   const fetchUser = async () => {
-    if (!token) return; // Don't fetch if token is missing
+    if (!token) return;
 
     try {
-      const { data } = await axios.get("/api/user/data");
+      const { data } = await axios.get("/api/user/data", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
       if (data.success) {
         setUser(data.user);
         setIsOwner(data.user.role === "owner");

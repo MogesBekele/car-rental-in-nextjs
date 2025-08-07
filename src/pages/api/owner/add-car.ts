@@ -1,25 +1,20 @@
-
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
+import { NextApiRequestWithUser } from '@/types/nextApiRequestWithUser'; // updated type here
+import multer from '@/lib/multer';
+import { protect } from '@/lib/auth';
+import Car from '@/models/Car';
+import connectDB from '@/lib/db';
 import fs from 'fs';
 import path from 'path';
-import multer from '@/lib/multer';
-import Car from '@/models/Car'; // ✅ Import your Car model
-import connectDB from '@/lib/db'; // ✅ Import your database connection utility
 
-// Extend NextApiRequest with optional multer file
-interface ExtendedRequest extends NextApiRequest {
-  file?: Express.Multer.File;
-}
-
-// Response shape interface
 interface ApiResponse {
   success: boolean;
   message: string;
   car?: unknown;
 }
 
-const handler = nextConnect<ExtendedRequest, NextApiResponse<ApiResponse>>({
+const handler = nextConnect<NextApiRequestWithUser, NextApiResponse<ApiResponse>>({
   onError: (err, req, res) => {
     console.error('API Error:', err);
     const message = err instanceof Error ? err.message : 'Internal server error';
@@ -32,22 +27,23 @@ const handler = nextConnect<ExtendedRequest, NextApiResponse<ApiResponse>>({
 
 handler.use(multer.single('image'));
 
-handler.post(async (req, res) => {
-  try {
-    await connectDB(); // ✅ Connect to MongoDB
+handler.post(
+  protect(async (req, res) => {
+    await connectDB();
 
     const imageFile = req.file;
-    const carData = JSON.parse(req.body.carData);
+    const user = req.user;
 
     if (!imageFile) {
-      return res.status(400).json({
-        success: false,
-        message: 'Image file is missing',
-      });
+      return res.status(400).json({ success: false, message: 'Image file is missing' });
+    }
+    if (!user) {
+      return res.status(401).json({ success: false, message: 'Unauthorized: user missing' });
     }
 
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+    const carData = JSON.parse(req.body.carData);
 
+    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true });
     }
@@ -57,10 +53,10 @@ handler.post(async (req, res) => {
 
     const imageUrl = `/uploads/${imageFile.originalname}`;
 
-    // ✅ Save car in MongoDB
     const newCar = await Car.create({
       ...carData,
       image: imageUrl,
+      owner: user._id,
     });
 
     res.status(200).json({
@@ -68,15 +64,8 @@ handler.post(async (req, res) => {
       message: 'Car added successfully',
       car: newCar,
     });
-  } catch (error: unknown) {
-    console.error('Error in POST /api/owner/add-car:', error);
-    const message = error instanceof Error ? error.message : 'Something went wrong';
-    res.status(500).json({
-      success: false,
-      message,
-    });
-  }
-});
+  })
+);
 
 export const config = {
   api: {
