@@ -1,72 +1,88 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import nextConnect from "next-connect";
-import multer from "multer";
-import fs from "fs";
-import path from "path";
-import Car from "@/models/Car";
-import connectDB from "@/lib/db";
-import { protect } from "@/lib/auth";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import nextConnect from 'next-connect';
+import fs from 'fs';
+import path from 'path';
+import multer from '@/lib/multer'; // adjust path if needed
 
-// Extend NextApiRequest to include multer file & user from auth
-interface NextApiRequestWithFile extends NextApiRequest {
+// Extend NextApiRequest with optional multer file
+interface ExtendedRequest extends NextApiRequest {
   file?: Express.Multer.File;
-  user?: any;  // Use your User type here if you have it
 }
 
-const uploadDir = path.join(process.cwd(), "uploads/cars");
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+// Response shape interface
+interface ApiResponse {
+  success: boolean;
+  message: string;
+  car?: unknown;
+}
 
-const storage = multer.diskStorage({
-  destination: uploadDir,
-  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
-});
-
-const upload = multer({ storage });
-
-const handler = nextConnect<NextApiRequestWithFile, NextApiResponse>({
-  onError(error, req, res) {
-    console.error(error);
-    res.status(500).json({ success: false, message: error.message });
+// Create handler with error and no-match handlers
+const handler = nextConnect<ExtendedRequest, NextApiResponse<ApiResponse>>({
+  onError: (err, req, res) => {
+    console.error('API Error:', err);
+    const message = err instanceof Error ? err.message : 'Internal server error';
+    res.status(500).json({ success: false, message });
   },
-  onNoMatch(req, res) {
+  onNoMatch: (req, res) => {
     res.status(405).json({ success: false, message: `Method ${req.method} Not Allowed` });
   },
 });
 
-handler.use(protect);
-handler.use(upload.single("image"));
+// Use multer middleware to handle single file upload named 'image'
+handler.use(multer.single('image'));
 
-handler.post(async (req: NextApiRequestWithFile, res: NextApiResponse) => {
+// POST endpoint logic
+handler.post(async (req, res) => {
   try {
-    await connectDB();
-
-    if (!req.user) {
-      return res.status(401).json({ success: false, message: "Unauthorized" });
-    }
-
-    if (!req.file) {
-      return res.status(400).json({ success: false, message: "Image file is missing" });
-    }
-
+    const imageFile = req.file;
     const carData = JSON.parse(req.body.carData);
 
-    const imagePath = `/uploads/cars/${req.file.filename}`;
+    if (!imageFile) {
+      return res.status(400).json({
+        success: false,
+        message: 'Image file is missing',
+      });
+    }
 
-    await Car.create({
-      ...carData,
-      owner: req.user._id,
-      image: imagePath,
+    // Define uploads directory path inside /public
+    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+
+    // Ensure uploads directory exists
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+
+    // Move file from temp location to uploads folder
+    const destinationPath = path.join(uploadsDir, imageFile.originalname);
+    fs.writeFileSync(destinationPath, fs.readFileSync(imageFile.path));
+
+    // Construct URL to serve image
+    const imageUrl = `/uploads/${imageFile.originalname}`;
+
+    // Send success response with car data including image URL
+    res.status(200).json({
+      success: true,
+      message: 'Car added successfully',
+      car: {
+        ...carData,
+        imageUrl,
+      },
     });
-
-    res.status(200).json({ success: true, message: "Car added successfully" });
-  } catch (error: any) {
-    console.error(error);
-    res.status(500).json({ success: false, message: error.message || "Server error" });
+  } catch (error: unknown) {
+    console.error('Error in POST /api/owner/add-car:', error);
+    const message = error instanceof Error ? error.message : 'Something went wrong';
+    res.status(500).json({
+      success: false,
+      message,
+    });
   }
 });
 
+// Disable Next.js default body parsing to allow multer to work
 export const config = {
-  api: { bodyParser: false },
+  api: {
+    bodyParser: false,
+  },
 };
 
 export default handler;

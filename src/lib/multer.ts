@@ -1,8 +1,9 @@
-import multer from "multer";
+import multer from 'multer';
+import path from 'path';
+import os from 'os';
 
-// Use memory storage for easier usage with Next.js API routes
-const storage = multer.memoryStorage();
-
-const upload = multer({ storage });
+const upload = multer({
+  dest: path.join(os.tmpdir()),
+});
 
 export default upload;
