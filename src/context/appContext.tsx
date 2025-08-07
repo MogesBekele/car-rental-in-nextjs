@@ -1,4 +1,5 @@
 "use client";
+
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import axios from "axios";
@@ -45,7 +46,8 @@ export const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider = ({ children }: AppProviderProps) => {
   const router = useRouter();
   const currency = process.env.NEXT_PUBLIC_CURRENCY || "USD";
- const [token, setToken] = useState<string | null>(null);
+
+  const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [isOwner, setIsOwner] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
@@ -53,14 +55,16 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   const [returnDate, setReturnDate] = useState("");
   const [cars, setCars] = useState<Car[]>([]);
 
-  // Set axios baseURL only once
+  // ✅ Set baseURL only once
   if (!axios.defaults.baseURL) {
-    axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+    axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   }
 
+  // ✅ Fetch user data
   const fetchUser = async () => {
+    if (!token) return; // Don't fetch if token is missing
+
     try {
-     
       const { data } = await axios.get("/api/user/data");
       if (data.success) {
         setUser(data.user);
@@ -74,6 +78,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     }
   };
 
+  // ✅ Fetch cars
   const fetchCars = async () => {
     try {
       const { data } = await axios.get("/api/user/cars");
@@ -81,11 +86,12 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         setCars(data.cars);
       }
     } catch (error) {
-      console.error(" Failed to fetch cars:", error);
+      console.error("Failed to fetch cars:", error);
       toast.error("Failed to fetch cars");
     }
   };
 
+  // ✅ Logout
   const logout = () => {
     localStorage.removeItem("token");
     setToken(null);
@@ -95,22 +101,22 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     toast.success("Logged out successfully");
   };
 
- useEffect(() => {
-  const storedToken = localStorage.getItem("token");
-  console.log("Loaded token from localStorage:", storedToken);
-  setToken(storedToken);
-}, []);
+  // ✅ Load token from localStorage once
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
 
-
-useEffect(() => {
-  if (token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    console.log("Token being sent:", axios.defaults.headers.common["Authorization"]); // ✅ This
-     fetchUser();
-    fetchCars();
-  }
-}, [token]);
-
+  // ✅ When token is set, configure axios and fetch user & cars
+  useEffect(() => {
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      fetchUser();
+      fetchCars();
+    }
+  }, [token]);
 
   const contextValue: AppContextType = {
     currency,
@@ -132,7 +138,6 @@ useEffect(() => {
     logout,
     axios,
     fetchUser,
-    
   };
 
   return (

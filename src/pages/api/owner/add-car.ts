@@ -1,8 +1,11 @@
+
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
 import fs from 'fs';
 import path from 'path';
-import multer from '@/lib/multer'; // adjust path if needed
+import multer from '@/lib/multer';
+import Car from '@/models/Car'; // ✅ Import your Car model
+import connectDB from '@/lib/db'; // ✅ Import your database connection utility
 
 // Extend NextApiRequest with optional multer file
 interface ExtendedRequest extends NextApiRequest {
@@ -16,7 +19,6 @@ interface ApiResponse {
   car?: unknown;
 }
 
-// Create handler with error and no-match handlers
 const handler = nextConnect<ExtendedRequest, NextApiResponse<ApiResponse>>({
   onError: (err, req, res) => {
     console.error('API Error:', err);
@@ -28,12 +30,12 @@ const handler = nextConnect<ExtendedRequest, NextApiResponse<ApiResponse>>({
   },
 });
 
-// Use multer middleware to handle single file upload named 'image'
 handler.use(multer.single('image'));
 
-// POST endpoint logic
 handler.post(async (req, res) => {
   try {
+    await connectDB(); // ✅ Connect to MongoDB
+
     const imageFile = req.file;
     const carData = JSON.parse(req.body.carData);
 
@@ -44,29 +46,27 @@ handler.post(async (req, res) => {
       });
     }
 
-    // Define uploads directory path inside /public
     const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
 
-    // Ensure uploads directory exists
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true });
     }
 
-    // Move file from temp location to uploads folder
     const destinationPath = path.join(uploadsDir, imageFile.originalname);
     fs.writeFileSync(destinationPath, fs.readFileSync(imageFile.path));
 
-    // Construct URL to serve image
     const imageUrl = `/uploads/${imageFile.originalname}`;
 
-    // Send success response with car data including image URL
+    // ✅ Save car in MongoDB
+    const newCar = await Car.create({
+      ...carData,
+      image: imageUrl,
+    });
+
     res.status(200).json({
       success: true,
       message: 'Car added successfully',
-      car: {
-        ...carData,
-        imageUrl,
-      },
+      car: newCar,
     });
   } catch (error: unknown) {
     console.error('Error in POST /api/owner/add-car:', error);
@@ -78,7 +78,6 @@ handler.post(async (req, res) => {
   }
 });
 
-// Disable Next.js default body parsing to allow multer to work
 export const config = {
   api: {
     bodyParser: false,
