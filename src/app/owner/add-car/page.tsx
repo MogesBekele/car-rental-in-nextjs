@@ -53,6 +53,7 @@ const AddCar = () => {
       const { data } = await axios.post("/api/owner/add-car", formData);
 
       if (data.success) {
+        alert("Car added successfully!");
         toast.success(data.message);
         setImage(null);
         setCar({
@@ -67,7 +68,6 @@ const AddCar = () => {
           location: "",
           description: "",
         });
-        toast.success("Car added successfully!");
       } else {
         toast.error(data.message);
       }

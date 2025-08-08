@@ -47,7 +47,7 @@ const ManageCars = () => {
         "Are you sure you want to delete this car?"
       );
       if (!comfirm) return;
-      const { data } = await axios.post(`/api/owner/delete-car`, { carId });
+      const { data } = await axios.delete(`/api/owner/delete-car/${carId}`);
       if (data.success) {
         toast.success(data.message);
         fetchOwerCars();
@@ -117,8 +117,8 @@ const ManageCars = () => {
                 </td>
                 <td className="p-3 flex items-center">
                   <Image
-                    width={20}
-                    height={20}
+                    width={50}
+                    height={40}
                     onClick={() => toggleAvailability(car._id)}
                     src={
                       car.isAvailable ? assets.eye_close_icon : assets.eye_icon
@@ -128,8 +128,8 @@ const ManageCars = () => {
                   />
 
                   <Image
-                    width={20}
-                    height={20}
+                    width={40}
+                    height={40}
                     onClick={() => deleteCar(car._id)}
                     src={assets.delete_icon}
                     alt=""

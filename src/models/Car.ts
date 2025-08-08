@@ -1,7 +1,7 @@
 import mongoose, { Schema, models, model, Types } from "mongoose";
 
 export interface ICar {
-  owner: Types.ObjectId;
+  owner: Types.ObjectId | null;  // allow null now
   brand: string;
   model: string;
   image: string;
@@ -20,7 +20,7 @@ export interface ICar {
 
 const carSchema = new Schema<ICar>(
   {
-    owner: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    owner: { type: Schema.Types.ObjectId, ref: "User", required: false, default: null }, // <-- changed here
     brand: { type: String, required: true },
     model: { type: String, required: true },
     image: { type: String, required: true },
