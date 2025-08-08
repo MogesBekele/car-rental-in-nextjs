@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { assets, dummyCarData } from "@/assets/assets";
+import { assets } from "@/assets/assets";
 import Title from "@/app/components/Title";
 import CarCard from "@/app/components/CarCard";
 import { useAppContext } from "@/context/AppContext";
@@ -33,7 +33,7 @@ const FeatureSection = () => {
         transition={{ duration: 1, delay: 1 }}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mt-18"
       >
-        {dummyCarData.slice(0, 6).map((car) => (
+        {cars.slice(0, 6).map((car) => (
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}

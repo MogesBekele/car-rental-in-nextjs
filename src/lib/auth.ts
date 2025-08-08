@@ -12,7 +12,6 @@ type Handler = (
 export const protect = (handler: Handler) => {
   return async (req: NextApiRequestWithUser, res: NextApiResponse) => {
     const authHeader = req.headers.authorization;
-    console.log("Authorization header:", authHeader);
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
@@ -22,27 +21,30 @@ export const protect = (handler: Handler) => {
     }
 
     const token = authHeader.split(" ")[1];
-    console.log("Token:", token);
 
     try {
       await connectDB();
 
-      const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string };
-      console.log("Decoded token:", decoded);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+        userId: string;
+      };
 
       const user = await User.findById(decoded.userId).select("-password");
       if (!user) {
         console.log("User not found for ID:", decoded.userId);
-        return res.status(404).json({ success: false, message: "User not found" });
+        return res
+          .status(404)
+          .json({ success: false, message: "User not found" });
       }
 
-      console.log("User found:", user.email, user.role);
       req.user = user;
 
       return handler(req, res);
     } catch (error) {
       console.error("JWT verification error:", error);
-      return res.status(401).json({ success: false, message: "Invalid or expired token" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid or expired token" });
     }
   };
 };
