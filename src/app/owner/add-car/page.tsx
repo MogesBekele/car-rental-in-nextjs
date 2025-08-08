@@ -67,6 +67,7 @@ const AddCar = () => {
           location: "",
           description: "",
         });
+        toast.success("Car added successfully!");
       } else {
         toast.error(data.message);
       }
