@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
-import { assets, ownerMenuLinks } from '@/assets/assets';
-import { useAppContext } from '@/context/AppContext';
+import { assets, ownerMenuLinks } from "@/assets/assets";
+import { useAppContext } from "@/context/appContext";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -19,15 +19,13 @@ const Sidebar = () => {
       if (!image) return;
 
       const formData = new FormData();
-      formData.append('image', image);
+      formData.append("image", image);
 
-      const { data } = await axios.post('/api/owner/update-image', formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
+      const { data } = await axios.post("/api/owner/update-image", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       if (data.success) {
         fetchUser();
@@ -37,8 +35,8 @@ const Sidebar = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.error('Error updating image:', error);
-      toast.error('Failed to update image. Please try again later.');
+      console.error("Error updating image:", error);
+      toast.error("Failed to update image. Please try again later.");
     }
   };
 
@@ -53,7 +51,7 @@ const Sidebar = () => {
             className="h-14 w-14 rounded-full mx-auto object-cover"
             src={
               image
-                ? typeof image === 'string'
+                ? typeof image === "string"
                   ? image
                   : URL.createObjectURL(image)
                 : user?.image || assets.car_image1
@@ -95,8 +93,8 @@ const Sidebar = () => {
             href={link.path}
             className={`relative flex items-center gap-2 w-full py-3 pl-4 ${
               pathname === link.path
-                ? 'bg-primary/10 text-primary'
-                : 'text-gray-600'
+                ? "bg-primary/10 text-primary"
+                : "text-gray-600"
             }`}
           >
             <Image

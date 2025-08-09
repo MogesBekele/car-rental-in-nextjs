@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, ReactNode } from "react";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/appContext";
 import { useRouter } from "next/navigation";
 import NavbarOwner from "@/app/components/owner/NavbarOwner";
 import Sidebar from "@/app/components/owner/Sidebar";
@@ -16,20 +16,24 @@ const OwnerLayout = ({ children }: OwnerLayoutProps) => {
 
   useEffect(() => {
     if (!isOwner) {
-      router.push("/");  // redirect to home if not owner
+      router.push("/"); // redirect to home if not owner
     }
   }, [isOwner, router]);
 
-  if (!isOwner) return null;  // or loading spinner if you prefer
+  if (!isOwner) return null; // or loading spinner if you prefer
 
   return (
     <div className="flex flex-col min-h-screen">
       <NavbarOwner />
       <div className="flex flex-1">
-        <aside className="w-52"> {/* fixed width sidebar */}
+        <aside className="w-52">
+          {" "}
+          {/* fixed width sidebar */}
           <Sidebar />
         </aside>
-        <main className="flex-1 p-6 overflow-auto"> {/* flex-grow main */}
+        <main className="flex-1 p-6 overflow-auto">
+          {" "}
+          {/* flex-grow main */}
           {children}
         </main>
       </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/appContext";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 const Login = () => {

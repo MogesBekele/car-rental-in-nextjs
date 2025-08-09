@@ -1,7 +1,7 @@
 "use client";
 import { assets, cityList } from "@/assets/assets";
 import { useState } from "react";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/appContext";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -93,7 +93,7 @@ const Hero = () => {
           className="flex items-center justify-center gap-1 px-9 py-3 max-sm:mt-4 bg-primary hover:bg-primary-dull text-white rounded-full cursor-pointer"
         >
           <Image
-            src={assets.search_icon} 
+            src={assets.search_icon}
             width={20}
             height={20}
             alt="search"

@@ -5,7 +5,7 @@ import "./globals.css";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import Login from "@/app/components/Login";
-import { AppProvider, useAppContext } from "@/context/AppContext";
+import { AppProvider, useAppContext } from "@/context/appContext";
 import { usePathname } from "next/navigation";
 
 const geistSans = Geist({
@@ -35,10 +35,16 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <AppProvider>
           <LayoutContent>{children}</LayoutContent>
         </AppProvider>

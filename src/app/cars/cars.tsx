@@ -1,7 +1,7 @@
-'use client';
+"use client";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/appContext";
 import { assets } from "@/assets/assets";
 import Title from "@/app/components/Title";
 import CarCard from "@/app/components/CarCard";

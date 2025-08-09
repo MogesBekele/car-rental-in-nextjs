@@ -1,5 +1,5 @@
 import { assets } from "@/assets/assets";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/appContext";
 import type { Car } from "@/app/components/DataType/dataType";
 import { useRouter } from "next/navigation";
 import Image from "next/image";

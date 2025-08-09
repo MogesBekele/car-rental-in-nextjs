@@ -5,7 +5,7 @@ import { assets } from "@/assets/assets";
 import { useEffect, useState } from "react";
 import type { Car } from "@/app/components/DataType/dataType";
 import Loading from "@/app/components/Loading";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/appContext";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import Image from "next/image";

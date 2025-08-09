@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Title from "@/app/components/owner/Title";
 import { assets } from "@/assets/assets";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/appContext";
 import Image from "next/image";
 import toast from "react-hot-toast";
 

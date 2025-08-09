@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import type { Booking } from "@/app/components/DataType/dataType";
 import Title from "@/app/components/owner/Title";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/appContext";
 import toast from "react-hot-toast";
 import Image from "next/image";
 

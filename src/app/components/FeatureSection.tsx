@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { assets } from "@/assets/assets";
 import Title from "@/app/components/Title";
 import CarCard from "@/app/components/CarCard";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/appContext";
 import { motion } from "motion/react";
 import Image from "next/image";
 
@@ -54,7 +54,8 @@ const FeatureSection = () => {
         }}
         className="flex items-center justify-center gap-2 mt-18 py-2 px-6 border-borderColor hover:bg-gray-50 rounded-md cursor-pointer"
       >
-        Explore all cars <Image width={20} height={20} src={assets.arrow_icon} alt="arrow" />
+        Explore all cars{" "}
+        <Image width={20} height={20} src={assets.arrow_icon} alt="arrow" />
       </motion.button>
     </motion.div>
   );

@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { assets } from "@/assets/assets";
-import Title from  "@/app/components/Title";
+import Title from "@/app/components/Title";
 import type { Booking } from "../components/DataType/dataType"; // Import the Booking type
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/appContext";
 import toast from "react-hot-toast";
 import { motion } from "motion/react";
 // Define types
@@ -23,7 +23,6 @@ const MyBookings = () => {
     } catch (error) {
       console.error("Error fetching bookings:", error);
       toast.error("Failed to fetch bookings");
-      
     }
   };
 
@@ -33,11 +32,11 @@ const MyBookings = () => {
 
   return (
     <motion.div
-    initial={{ y: 30, opacity: 0 }}
-    animate={{ y: 0, opacity: 1 }}
-    transition={{ duration: 0.6 }}
-    
-    className="px-6 md:px-16 lg:px-24 xl:px-32  2xl:px-48 mt-16 text-sm max-w-7xl">
+      initial={{ y: 30, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="px-6 md:px-16 lg:px-24 xl:px-32  2xl:px-48 mt-16 text-sm max-w-7xl"
+    >
       <Title
         title="My Bookings"
         subTitle="View and manage your bookings here"
@@ -47,9 +46,9 @@ const MyBookings = () => {
       <div>
         {bookings.map((booking, index) => (
           <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: index * 0.1 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
             key={index}
             className="grid grid-cols-1 md:grid-cols-4 gap-6 p-6 border border-borderColor rounded-lg mt-5 first:mt-12"
           >

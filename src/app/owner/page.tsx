@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { assets} from "@/assets/assets";
+import { assets } from "@/assets/assets";
 import Title from "@/app/components/owner/Title";
 import type { DashboardData } from "@/app/components/DataType/dataType";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/context/appContext";
 import toast from "react-hot-toast";
 import Image from "next/image";
 
@@ -15,8 +15,7 @@ type Card = {
   icon: string;
 };
 const Dashboard = () => {
- 
-  const {axios, isOwner, currency} = useAppContext()
+  const { axios, isOwner, currency } = useAppContext();
   // 2. Type your state
   const [data, setData] = useState<DashboardData>({
     totalCars: 0,
@@ -50,24 +49,22 @@ const Dashboard = () => {
     },
   ];
 
-  const fetchDashboardData = async ()=>{
-  try {
-    const {data}= await axios.get('/api/owner/dashboard')
-    if(data.success){
-      setData(data.dashboardData)
-    }else{
-      toast.error(data.message)
+  const fetchDashboardData = async () => {
+    try {
+      const { data } = await axios.get("/api/owner/dashboard");
+      if (data.success) {
+        setData(data.dashboardData);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching dashboard data:", error);
+      toast.error("Failed to fetch dashboard data");
     }
-  } catch (error) {
-    console.error("Error fetching dashboard data:", error);
-    toast.error("Failed to fetch dashboard data");
-    
-  }
-
-  }
+  };
 
   useEffect(() => {
-    fetchDashboardData()
+    fetchDashboardData();
   }, [isOwner]);
 
   return (
@@ -87,7 +84,13 @@ const Dashboard = () => {
               <p className="text-lg font-semibold">{card.value}</p>
             </div>
             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10">
-              <Image width={20} height={20} src={card.icon} alt="" className="w-4 h-4" />
+              <Image
+                width={20}
+                height={20}
+                src={card.icon}
+                alt=""
+                className="w-4 h-4"
+              />
             </div>
           </div>
         ))}
@@ -119,8 +122,13 @@ const Dashboard = () => {
                 </div>
               </div>
               <div className="flex items-center gap-2 font-medium">
-                <p className="text-sm text-gray-500">{currency}{booking.price}</p>
-                <p className="px-3 py-0.5 border border-borderColor rounded-full text-sm">{booking.status}</p>
+                <p className="text-sm text-gray-500">
+                  {currency}
+                  {booking.price}
+                </p>
+                <p className="px-3 py-0.5 border border-borderColor rounded-full text-sm">
+                  {booking.status}
+                </p>
               </div>
             </div>
           ))}
@@ -129,7 +137,10 @@ const Dashboard = () => {
         <div className="p-4 md:p-6 mb-6 border border-borderColor rounded-md w-full md:max-w-xs">
           <h1 className="text-lg font-medium">Monthly Revenue</h1>
           <p className="text-gray-500">Revenue for current month</p>
-          <p className="text-3xl mt-6 font-semibold text-primary">{currency}{data.monthlyRevenue}</p>
+          <p className="text-3xl mt-6 font-semibold text-primary">
+            {currency}
+            {data.monthlyRevenue}
+          </p>
         </div>
       </div>
     </div>
