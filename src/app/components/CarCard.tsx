@@ -20,11 +20,12 @@ const CarCard = ({ car }: CarCardProps) => {
       }}
       className="group rounded-xl overflow-hidden shadow-lg hover:-translate-y-1 transition-all duration-500 cursor-pointer"
     >
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-64 overflow-hidden">
         <Image
           src={car.image}
           alt="car image"
-          fill
+          width={400}
+          height={300}
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         {car.isAvailable && (
