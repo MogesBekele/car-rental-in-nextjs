@@ -92,7 +92,7 @@ const Hero = () => {
           className="flex items-center justify-center gap-1 px-9 py-3 max-sm:mt-4 bg-primary hover:bg-primary-dull text-white rounded-full cursor-pointer"
         >
           <img
-            src={assets.search_icon} // Ensure this points to SVG: e.g., /assets/search_icon.svg
+            src={assets.search_icon} 
             alt="search"
             className="brightness-300 w-5 h-5"
           />

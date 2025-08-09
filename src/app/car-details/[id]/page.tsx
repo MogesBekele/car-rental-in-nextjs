@@ -31,6 +31,8 @@ const CarDetails = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      console.log("Booking data:", { car: id, pickupDate, returnDate });
+
       const { data } = await axios.post("/api/bookings/createBookings", {
         car: id,
         pickupDate,
