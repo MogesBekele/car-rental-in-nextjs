@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAppContext } from "@/context/AppContext";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Hero = () => {
   const [pickupLocation, setPickupLocation] = useState<string>("");
@@ -91,8 +92,10 @@ const Hero = () => {
           disabled={!pickupLocation || !pickupDate || !returnDate}
           className="flex items-center justify-center gap-1 px-9 py-3 max-sm:mt-4 bg-primary hover:bg-primary-dull text-white rounded-full cursor-pointer"
         >
-          <img
+          <Image
             src={assets.search_icon} 
+            width={20}
+            height={20}
             alt="search"
             className="brightness-300 w-5 h-5"
           />

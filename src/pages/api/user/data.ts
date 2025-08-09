@@ -1,5 +1,5 @@
 // src/pages/api/user/data.ts
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiResponse } from "next";
 import type { NextApiRequestWithUser } from "@/types/nextApiRequestWithUser";
 import { protect } from "@/lib/auth";
 
