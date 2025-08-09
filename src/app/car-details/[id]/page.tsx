@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { assets, dummyCarData } from "@/assets/assets";
+import { assets } from "@/assets/assets";
 import { useEffect, useState } from "react";
 import type { Car } from "@/app/components/DataType/dataType";
 import Loading from "@/app/components/Loading";
@@ -11,7 +11,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const CarDetails = () => {
-  const { id } = useParams();
+  const params = useParams();
+  const id = Array.isArray(params?.id) ? params.id[0] : params?.id || "";
+
   const router = useRouter();
 
   const {
@@ -29,7 +31,7 @@ const CarDetails = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/bookings/create", {
+      const { data } = await axios.post("/api/bookings/createBookings", {
         car: id,
         pickupDate,
         returnDate,
@@ -48,9 +50,9 @@ const CarDetails = () => {
   };
 
   useEffect(() => {
-    // const foundCar = cars.find((car) => car._id === id);
-    // setCar(foundCar ?? null);
-    setCar(dummyCarData.find((car) => car._id === id) || null);
+    const foundCar = cars.find((car) => car._id === id);
+    setCar(foundCar ?? null);
+
     if (!id) {
       router.push("/");
     }
@@ -62,7 +64,13 @@ const CarDetails = () => {
         className="flex items-center gap-2 mb-6 text-gray-500 cursor-pointer"
         onClick={() => router.back()}
       >
-        <Image src={assets.arrow_icon} alt="" width={16} height={16} className="rotate-180 opacity-65" />
+        <Image
+          src={assets.arrow_icon}
+          alt=""
+          width={16}
+          height={16}
+          className="rotate-180 opacity-65"
+        />
         Back to all cars
       </button>
 
@@ -90,7 +98,9 @@ const CarDetails = () => {
             className="space-y-6"
           >
             <div>
-              <h1 className="text-3xl font-bold">{car.brand} {car.model}</h1>
+              <h1 className="text-3xl font-bold">
+                {car.brand} {car.model}
+              </h1>
               <p className="text-gray-500 text-lg">{car.category}</p>
             </div>
 
@@ -113,7 +123,13 @@ const CarDetails = () => {
                   key={text}
                   className="flex items-center bg-light p-4 rounded-lg"
                 >
-                  <Image src={icon} alt="" width={20} height={20} className="mr-2" />
+                  <Image
+                    src={icon}
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="mr-2"
+                  />
                   {text}
                 </motion.div>
               ))}
@@ -135,7 +151,13 @@ const CarDetails = () => {
                 "Leather Seats",
               ].map((item) => (
                 <li key={item} className="flex items-center text-gray-500">
-                  <Image src={assets.check_icon} alt="" width={16} height={16} className="mr-2" />
+                  <Image
+                    src={assets.check_icon}
+                    alt=""
+                    width={16}
+                    height={16}
+                    className="mr-2"
+                  />
                   {item}
                 </li>
               ))}
@@ -154,7 +176,10 @@ const CarDetails = () => {
           <p className="flex items-center justify-between text-2xl text-gray-800 font-semibold">
             {currency}
             {car.pricePerDay}
-            <span className="text-base text-gray-400 font-normal"> per day</span>
+            <span className="text-base text-gray-400 font-normal">
+              {" "}
+              per day
+            </span>
           </p>
 
           <hr className="border-borderColor my-6" />
@@ -187,7 +212,9 @@ const CarDetails = () => {
           <button className="w-full bg-primary text-white py-3 rounded-xl hover:bg-primary-dull font-medium transition-all cursor-pointer">
             Book Now
           </button>
-          <p className="text-sm text-center">No credit card required to reserve</p>
+          <p className="text-sm text-center">
+            No credit card required to reserve
+          </p>
         </motion.form>
       </div>
     </div>

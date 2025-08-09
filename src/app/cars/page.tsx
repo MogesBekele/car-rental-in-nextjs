@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams} from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/context/AppContext";
 import { assets } from "@/assets/assets";
@@ -12,9 +12,9 @@ import { motion } from "framer-motion"; // fix motion import
 
 const Cars = () => {
   const searchParams = useSearchParams();
-  const pickupLocation = searchParams.get("pickupLocation");
-  const pickupDate = searchParams.get("pickupDate");
-  const returnDate = searchParams.get("returnDate");
+  const pickupLocation = searchParams?.get("pickupLocation") || "";
+  const pickupDate = searchParams?.get("pickupDate") || "";
+  const returnDate = searchParams?.get("returnDate") || "";
 
   const { cars, axios } = useAppContext();
   const [input, setInput] = useState<string>("");
@@ -86,7 +86,11 @@ const Cars = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="flex items-center bg-white px-4 mt-6 max-w-140 w-full h-12 rounded-full shadow"
         >
-          <img src={assets.search_icon} alt="search" className="w-4.5 h-4.5 mr-2" />
+          <img
+            src={assets.search_icon}
+            alt="search"
+            className="w-4.5 h-4.5 mr-2"
+          />
           <input
             onChange={(e) => setInput(e.target.value)}
             value={input}
@@ -94,7 +98,11 @@ const Cars = () => {
             placeholder="Search by brand, model, make, or features"
             className="outline-none w-full h-full text-gray-500"
           />
-          <img src={assets.filter_icon} alt="filter" className="w-4.5 h-4.5 ml-2" />
+          <img
+            src={assets.filter_icon}
+            alt="filter"
+            className="w-4.5 h-4.5 ml-2"
+          />
         </motion.div>
       </motion.div>
 

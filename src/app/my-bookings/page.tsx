@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { assets, dummyMyBookingsData } from "@/assets/assets";
+import { assets } from "@/assets/assets";
 import Title from  "@/app/components/Title";
 import type { Booking } from "../components/DataType/dataType"; // Import the Booking type
 import { useAppContext } from "@/context/AppContext";
@@ -14,15 +14,16 @@ const MyBookings = () => {
 
   const fetchBookings = async () => {
     try {
-      const { data } = await axios.get("/api/bookings/user");
+      const { data } = await axios.get("/api/bookings/userBookings");
       if (data.success) {
         setBookings(data.bookings);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      const err = error as any;
-      toast.error(err.response?.data?.message || "Something went wrong");
+      console.error("Error fetching bookings:", error);
+      toast.error("Failed to fetch bookings");
+      
     }
   };
 
@@ -44,7 +45,7 @@ const MyBookings = () => {
       />
 
       <div>
-        {dummyMyBookingsData.map((booking, index) => (
+        {bookings.map((booking, index) => (
           <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
