@@ -21,7 +21,13 @@ const Sidebar = () => {
       const formData = new FormData();
       formData.append('image', image);
 
-      const { data } = await axios.post('/api/owner/update-image', formData);
+      const { data } = await axios.post('/api/owner/update-image', formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
 
       if (data.success) {
         fetchUser();
@@ -71,7 +77,7 @@ const Sidebar = () => {
       {image && (
         <button
           onClick={updateImage}
-          className="absolute top-2 right-2 p-2 flex items-center gap-1 bg-primary text-white text-xs rounded shadow-sm"
+          className="absolute top-2 right-2 p-2 flex items-center gap-1 bg-primary text-white text-xs rounded shadow-sm hover:cursor-pointer"
         >
           Save
           <Image src={assets.check_icon} width={13} height={13} alt="Check" />
