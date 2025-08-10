@@ -2,11 +2,11 @@
 import { useEffect, useState } from "react";
 import { assets } from "@/assets/assets";
 import Title from "@/app/components/Title";
-import type { Booking } from "../components/DataType/dataType"; // Import the Booking type
+import type { Booking } from "../components/DataType/dataType"; 
 import { useAppContext } from "@/context/appContext";
 import toast from "react-hot-toast";
 import { motion } from "motion/react";
-// Define types
+
 
 const MyBookings = () => {
   const { currency, user, axios } = useAppContext();

@@ -9,7 +9,7 @@ import NewsLetter from "@/app/components/NewsLetter";
 export default function Home() {
   return (
     <>
-      {/* Your other components or content */}
+    
       <main>
         <Hero />
         <FeatureSection />

@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// ✅ Inner content so we can access context after AppProvider
+
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { showLogin } = useAppContext();

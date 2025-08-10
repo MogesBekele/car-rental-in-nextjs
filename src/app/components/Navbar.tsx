@@ -4,9 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { motion } from "framer-motion"; // ✅ Correct import
-import { useAppContext } from "@/context/appContext"; // ✅ Correct import
-import { menuLinks } from "@/assets/assets"; // ✅ Absolute import if tsconfig has baseUrl
+import { motion } from "framer-motion"; 
+import { useAppContext } from "@/context/appContext"; 
+import { menuLinks } from "@/assets/assets"; 
 
 type MenuLink = {
   name: string;
