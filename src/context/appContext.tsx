@@ -56,10 +56,12 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   const [cars, setCars] = useState<Car[]>([]);
 
   // ✅ Set baseURL only once
-  if (!axios.defaults.baseURL) {
-    axios.defaults.baseURL =
-      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  }
+ if (!axios.defaults.baseURL) {
+  axios.defaults.baseURL =
+    process.env.NODE_ENV === "production"
+      ? ""
+      : "http://localhost:3000";
+}
 
   // ✅ Fetch user data
   const fetchUser = async () => {
