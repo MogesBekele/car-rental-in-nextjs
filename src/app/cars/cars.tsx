@@ -87,6 +87,8 @@ const Cars = () => {
           className="flex items-center bg-white px-4 mt-6 max-w-140 w-full h-12 rounded-full shadow"
         >
           <Image
+            width={18}
+            height={18}
             src={assets.search_icon}
             alt="search"
             className="w-4.5 h-4.5 mr-2"
@@ -102,7 +104,11 @@ const Cars = () => {
             onClick={applyFilter}
             src={assets.filter_icon}
             alt="filter"
-            className="w-4.5 h-4.5 ml-2"
+            className="w-4.5 h-4.5 ml-2 hover:cursor-pointer"
+            width={18}
+            height={18}
+
+      
           />
         </motion.div>
       </motion.div>
