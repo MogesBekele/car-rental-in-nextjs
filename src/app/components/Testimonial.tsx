@@ -15,14 +15,14 @@ const Testimonail = () => {
   // 2. Type the array
   const testimonials: Testimonial[] = [
     {
-      name: "ዳንኤል ሀይለማርያም",
+      name: "ዳንኤል አስፋው",
       location: "አዲስ አበባ, ኢትዮጵያ",
       image: assets.testimonial_image_1,
       testimonail:
         "የተለያዩ ተሽከርካሪዎች ለቅናሽ ማግኘት እና በቀላሉ ኪራይ ማድረግ እዚህ ተቻለ። በእነሱ አገልግሎት ተገናኝቼ ደስ ብሎኛል።",
     },
     {
-      name: "አለማ ገብረሚካኤል",
+      name: "ሚስተር አልፋዊ",
       location: "አዲስ አበባ, ኢትዮጵያ",
       image: assets.testimonial_image_2,
       testimonail:
