@@ -37,7 +37,7 @@ export const assets = {
   calendar_icon_colored: "/assets/calendar_icon_colored.svg",
   location_icon_colored: "/assets/location_icon_colored.svg",
   testimonial_image_1: "/assets/testimonial_image_1.png",
-  testimonial_image_2: "/assets/testimonial_image_2.png",
+  testimonial_image_2: "/assets/image.jpg",
   main_car: "/assets/main_car.png",
   banner_car_image: "/assets/banner_car_image.png",
   user_profile: "/assets/user_profile.png",

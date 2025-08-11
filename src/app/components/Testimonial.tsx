@@ -17,21 +17,21 @@ const Testimonail = () => {
     {
       name: "ዳንኤል አስፋው",
       location: "አዲስ አበባ, ኢትዮጵያ",
-      image: assets.testimonial_image_1,
+      image: assets.testimonial_image_2,
       testimonail:
         "የተለያዩ ተሽከርካሪዎች ለቅናሽ ማግኘት እና በቀላሉ ኪራይ ማድረግ እዚህ ተቻለ። በእነሱ አገልግሎት ተገናኝቼ ደስ ብሎኛል።",
     },
     {
       name: "ሚስተር አልፋዊ",
       location: "አዲስ አበባ, ኢትዮጵያ",
-      image: assets.testimonial_image_2,
+      image: assets.testimonial_image_1,
       testimonail:
         "እኔ እንደ ባለመኪና በCarRental መኪናዬን ቀላል ሁኔታ አስተዋውቄ ገቢ አገኘሁ። እነሱ የኢንሹራንስ እና የአሽከርካሪ ማረጋገጫ እንዲሁም የደህንነት ክፍያ ሁሉንም በተጠናቀቀ ሁኔታ ያደርጋሉ። እጅግ ተመናቀቁ።",
     },
     {
       name: "ኢብራሂም ወልደማርያም",
       location: "ባህር ዳር, ኢትዮጵያ",
-      image: assets.testimonial_image_1,
+      image: assets.testimonial_image_2,
       testimonail:
         "መኪና ኪራይ ለመውሰድ በእነሱ ላይ እምነት አለኝ። ደንበኞቻቸውን እጅግ ተከትለው በሚሰሩ ናቸው። አገልግሎታቸው እጅግ ተደላይተኛ ነው።.",
     },
