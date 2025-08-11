@@ -40,8 +40,8 @@ const Testimonail = () => {
   return (
     <div className="py-28 px-6 md:px-16 lg:px-24 xl:px-44">
       <Title
-        title="What Our Customers Say"
-        subTitle="Discover what our satisfied customers have to say about our exceptional service."
+        title="የደንበኞቻችን አስተያየት"
+        subTitle="ስለ እጅግ ደስ የሚል አገልግሎታችን የሚናገሩትን ደንበኞቻችንን ያገኙ።"
       />
 
       <motion.div

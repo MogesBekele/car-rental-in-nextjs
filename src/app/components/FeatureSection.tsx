@@ -23,8 +23,8 @@ const FeatureSection = () => {
         transition={{ duration: 0.5, delay: 0.5 }}
       >
         <Title
-          title="Features Vehicles"
-          subTitle="Explore our selection of premium vehicles available for your next adventure "
+          title="የተለዩ ተሽከርካሪዎች"
+          subTitle="ለሚቀጥለው ጉዞዎ የተመረጡ ከፍተኛ ጥራት ተሽከርካሪዎች፣ ከግልጽ ምቾት እና ከፍተኛ ቅናሽ ጋር "
         />
       </motion.div>
       <motion.div
