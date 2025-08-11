@@ -1,4 +1,4 @@
-// src/pages/api/cars/get-cars.ts
+// src/pages/api/cars.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Car from '@/models/Car';
 
