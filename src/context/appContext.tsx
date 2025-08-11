@@ -87,9 +87,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   // ✅ Fetch cars
   const fetchCars = async () => {
     try {
-      const { data } = await axios.get("/api/user/cars", {
-        headers: { Authorization: "" },
-      });
+      const { data } = await axios.get("/api/user/cars");
       if (data.success) {
         setCars(data.cars);
       }
@@ -117,14 +115,20 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     }
   }, []);
 
-  // ✅ When token is set, configure axios and fetch user & cars
-  useEffect(() => {
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      fetchUser();
-      fetchCars();
-    }
-  }, [token]);
+  //When token is set, configure axios and fetch user & cars
+useEffect(() => {
+  fetchCars(); 
+
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    fetchUser();
+  } else {
+    delete axios.defaults.headers.common["Authorization"]; // remove auth header if no token
+    setUser(null);
+    setIsOwner(false);
+  }
+}, [token]);
+
 
   const contextValue: AppContextType = {
     currency,

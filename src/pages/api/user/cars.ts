@@ -1,6 +1,8 @@
-// src/pages/api/cars.ts
+
+// src/pages/api/user/cars.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Car from '@/models/Car';
+import connectDB from '@/lib/db'
 
 const getCars = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'GET') {
@@ -8,6 +10,7 @@ const getCars = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
+    await connectDB()
     const cars = await Car.find({ isAvailable: true });
     res.status(200).json({ success: true, cars });
   } catch (error) {
