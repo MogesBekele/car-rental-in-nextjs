@@ -65,7 +65,7 @@ const Navbar = () => {
         } ${open ? "max-sm:translate-x-0" : "max-sm:-translate-x-full"}`}
       >
         {menuLinks.map((link: MenuLink, index) => (
-          <Link key={index} href={link.path}>
+          <Link key={index} href={link.path} onClick={() => setOpen(false)}>
             {link.name}
           </Link>
         ))}
