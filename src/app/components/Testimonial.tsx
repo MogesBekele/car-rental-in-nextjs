@@ -15,25 +15,25 @@ const Testimonail = () => {
   // 2. Type the array
   const testimonials: Testimonial[] = [
     {
-      name: "Yasin Hassen",
-      location: "Addis Ababa, Ethiopia",
+      name: "ዳንኤል ሀይለማርያም",
+      location: "አዲስ አበባ, ኢትዮጵያ",
       image: assets.testimonial_image_1,
       testimonail:
-        "I've had the pleasure of using the services of this company and I can't recommend them enough. They were professional, responsive, and delivered a product that exceeded my expectations.",
+        "የተለያዩ ተሽከርካሪዎች ለቅናሽ ማግኘት እና በቀላሉ ኪራይ ማድረግ እዚህ ተቻለ። በእነሱ አገልግሎት ተገናኝቼ ደስ ብሎኛል።",
     },
     {
-      name: "alemayehu",
-      location: "Addis Ababa, Ethiopia",
+      name: "አለማ ገብረሚካኤል",
+      location: "አዲስ አበባ, ኢትዮጵያ",
       image: assets.testimonial_image_2,
       testimonail:
-        "I've had the pleasure of using the services of this company and I can't recommend them enough. They were professional, responsive, and delivered a product that exceeded my expectations.",
+        "እኔ እንደ ባለመኪና በCarRental መኪናዬን ቀላል ሁኔታ አስተዋውቄ ገቢ አገኘሁ። እነሱ የኢንሹራንስ እና የአሽከርካሪ ማረጋገጫ እንዲሁም የደህንነት ክፍያ ሁሉንም በተጠናቀቀ ሁኔታ ያደርጋሉ። እጅግ ተመናቀቁ።",
     },
     {
-      name: "Minase",
-      location: "Addis Ababa, Ethiopia",
+      name: "ኢብራሂም ወልደማርያም",
+      location: "ባህር ዳር, ኢትዮጵያ",
       image: assets.testimonial_image_1,
       testimonail:
-        "I've had the pleasure of using the services of this company and I can't recommend them enough. They were professional, responsive, and delivered a product that exceeded my expectations.",
+        "መኪና ኪራይ ለመውሰድ በእነሱ ላይ እምነት አለኝ። ደንበኞቻቸውን እጅግ ተከትለው በሚሰሩ ናቸው። አገልግሎታቸው እጅግ ተደላይተኛ ነው።.",
     },
   ];
 
