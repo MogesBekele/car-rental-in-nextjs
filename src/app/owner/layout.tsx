@@ -26,7 +26,7 @@ const OwnerLayout = ({ children }: OwnerLayoutProps) => {
     <div className="flex flex-col min-h-screen">
       <NavbarOwner />
       <div className="flex flex-1">
-        <aside className="w-52">
+        <aside className="w-52 max-sm:w-10">
           {" "}
           {/* fixed width sidebar */}
           <Sidebar />

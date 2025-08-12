@@ -48,7 +48,8 @@ const Sidebar = () => {
           <Image
             width={56}
             height={56}
-            className="h-14 w-14 rounded-full mx-auto object-cover"
+            className="h-14 w-14 rounded-full mx-auto object-cover max-sm:hidden
+              "
             src={
               image
                 ? typeof image === "string"
