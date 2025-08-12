@@ -16,8 +16,6 @@ const Login = () => {
       const payload =
         state === "register" ? { name, email, password } : { email, password };
 
-      console.log("Logging in with password:", password);
-
       const { data } = await axios.post(`/api/user/${state}`, payload);
 
       if (data.success) {
@@ -25,6 +23,7 @@ const Login = () => {
         setToken(data.token);
         localStorage.setItem("token", data.token);
         setShowLogin(false);
+        toast.success(data.message || "Login successful");
         router.push("/");
       } else {
         toast.error(data.message || "Something went wrong");

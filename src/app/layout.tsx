@@ -7,6 +7,7 @@ import Footer from "@/app/components/Footer";
 import Login from "@/app/components/Login";
 import { AppProvider, useAppContext } from "@/context/appContext";
 import { usePathname } from "next/navigation";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,6 +48,7 @@ export default function RootLayout({
       >
         <AppProvider>
           <LayoutContent>{children}</LayoutContent>
+          <Toaster/>
         </AppProvider>
       </body>
     </html>
