@@ -31,7 +31,7 @@ const Navbar = () => {
       }
     } catch (error) {
       console.error("Role change failed:", error);
-      toast.error("Failed to change role");
+      toast.error("please login first");
     }
   };
 
