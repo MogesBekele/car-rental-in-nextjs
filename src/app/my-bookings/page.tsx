@@ -116,8 +116,9 @@ const MyBookings = () => {
               <div className="text-sm text-gray-500 text-right">
                 <p>Total Price</p>
                 <h1 className="text-2xl font-semibold text-primary">
-                  {currency}
+              
                   {booking.price}
+                      {currency}
                 </h1>
                 <p>Booked on {booking.createdAt.split("T")[0]}</p>
               </div>

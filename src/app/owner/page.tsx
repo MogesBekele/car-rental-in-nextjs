@@ -123,8 +123,9 @@ const Dashboard = () => {
               </div>
               <div className="flex items-center gap-2 font-medium">
                 <p className="text-sm text-gray-500">
-                  {currency}
+                 
                   {booking.price}
+                   {currency}
                 </p>
                 <p className="px-3 py-0.5 border border-borderColor rounded-full text-sm">
                   {booking.status}
@@ -138,8 +139,9 @@ const Dashboard = () => {
           <h1 className="text-lg font-medium">Monthly Revenue</h1>
           <p className="text-gray-500">Revenue for current month</p>
           <p className="text-3xl mt-6 font-semibold text-primary">
-            {currency}
+          
             {data.monthlyRevenue}
+              {currency}
           </p>
         </div>
       </div>

@@ -106,8 +106,9 @@ const ManageBookings = () => {
                   {booking.returnDate.split("T")[0]}
                 </td>
                 <td className="p-3">
-                  {currency}
+                
                   {booking.price}
+                    {currency}
                 </td>
                 <td className="p-3 max-md:hidden">
                   <span className="bg-gray-100 px-3 py-1 rounded-full text-sm">

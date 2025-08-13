@@ -101,8 +101,8 @@ const ManageCars = () => {
                 </td>
                 <td className="p-3 max-md:hidden">{car.category}</td>
                 <td className="p-3">
-                  {currency}
-                  {car.pricePerDay}/day
+            
+                  {car.pricePerDay} {currency}/day
                 </td>
                 <td className="p-3 max-md:hidden">
                   <span
