@@ -145,8 +145,8 @@ const Footer = () => {
             <ul className="mt-3 flex flex-col gap-1.5">
               <li>megenagna street, Addis Ababa</li>
               <li>Addis Ababa, Ethiopia</li>
-              <li>+251 964671617</li>
-              <li>mogesbekele@gmail.com</li>
+              <li>+251 92929292</li>
+              <li>carrental@gmail.com</li>
             </ul>
           </div>
         </motion.div>
