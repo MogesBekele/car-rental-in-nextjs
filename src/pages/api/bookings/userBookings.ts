@@ -15,7 +15,6 @@ import { protect } from "@/lib/auth";
   }
   try {
     await connectDB();
-
     if (!req.user) {
       return res.status(401).json({ success: false, message: "Unauthorized" });
     }
