@@ -10,6 +10,7 @@ type OwnerLayoutProps = {
   children: ReactNode;
 };
 
+// Layout component for owner pages
 const OwnerLayout = ({ children }: OwnerLayoutProps) => {
   const { isOwner } = useAppContext();
   const router = useRouter();
