@@ -9,7 +9,6 @@ import Sidebar from "@/app/components/owner/Sidebar";
 type OwnerLayoutProps = {
   children: ReactNode;
 };
-
 // Layout component for owner pages
 const OwnerLayout = ({ children }: OwnerLayoutProps) => {
   const { isOwner } = useAppContext();
