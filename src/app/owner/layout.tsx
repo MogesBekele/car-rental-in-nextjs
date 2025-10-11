@@ -31,7 +31,9 @@ const OwnerLayout = ({ children }: OwnerLayoutProps) => {
           {/* fixed width sidebar */}
           <Sidebar />
         </aside>
-        <main className="flex-1 max-sm:ml-1 sm:ml-6  overflow-auto">{children}</main>
+        <main className="flex-1 max-sm:ml-1 sm:ml-6  overflow-auto">
+          {children}
+        </main>
       </div>
     </div>
   );
