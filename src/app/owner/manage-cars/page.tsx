@@ -7,6 +7,7 @@ import { useAppContext } from "@/context/appContext";
 import toast from "react-hot-toast";
 import Image from "next/image";
 
+
 const ManageCars = () => {
   const { isOwner, axios, currency } = useAppContext();
   const [cars, setCars] = useState<Car[]>([]);
