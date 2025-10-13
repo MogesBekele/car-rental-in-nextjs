@@ -19,6 +19,8 @@ import { protect } from "@/lib/auth";
       return res.status(401).json({ success: false, message: "Unauthorized" });
     }
 
+  
+
     const { _id } = req.user;
     const bookings = await Booking.find({ user: _id })
       .populate("car")
