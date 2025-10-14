@@ -10,6 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { location, pickupDate, returnDate } = req.body;
 
   try {
+    
     await connectDB();
 
     // Example query: Find bookings that overlap with requested dates and location
