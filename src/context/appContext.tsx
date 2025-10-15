@@ -40,7 +40,6 @@ interface AppContextType {
 interface AppProviderProps {
   children: ReactNode;
 }
-
 export const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider = ({ children }: AppProviderProps) => {
@@ -96,7 +95,6 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       toast.error("Failed to fetch cars");
     }
   };
-
   // ✅ Logout
   const logout = () => {
     localStorage.removeItem("token");
