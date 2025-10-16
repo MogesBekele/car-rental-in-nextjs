@@ -2,7 +2,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import Car from "@/models/Car";
 import connectDB from "@/lib/db";
-
 const getCars = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "GET") {
     return res
