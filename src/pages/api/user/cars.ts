@@ -10,6 +10,7 @@ const getCars = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
+  
     await connectDB();
     const cars = await Car.find({ isAvailable: true });
     res.status(200).json({ success: true, cars });
