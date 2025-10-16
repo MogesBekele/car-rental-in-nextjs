@@ -1,40 +1,19 @@
-"use client";
-
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/app/components/Navbar";
-import Footer from "@/app/components/Footer";
-import Login from "@/app/components/Login";
-import { AppProvider, useAppContext } from "@/context/appContext";
-import { usePathname } from "next/navigation";
-import { Toaster } from "react-hot-toast";
+import { AppProvider } from "@/context/appContext";
+import LayoutContent from "@/app/components/LayoutContent";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
-
-function LayoutContent({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const { showLogin } = useAppContext();
-
-  const isOwnerPath = pathname?.startsWith("/owner");
-
-  return (
-    <>
-      {!isOwnerPath && <Navbar />}
-      {showLogin && <Login />}
-      {children}
-      {!isOwnerPath && <Footer />}
-    </>
-  );
-}
+export const metadata: Metadata = {
+  title: "Car Rental",
+  description: "Car rental app",
+};
 
 export default function RootLayout({
   children,
@@ -48,7 +27,6 @@ export default function RootLayout({
       >
         <AppProvider>
           <LayoutContent>{children}</LayoutContent>
-          <Toaster/>
         </AppProvider>
       </body>
     </html>

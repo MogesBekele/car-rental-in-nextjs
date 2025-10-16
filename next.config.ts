@@ -1,6 +1,5 @@
 const nextConfig = {
-  experimental: {
-    turbopack: false,
-  },
+  reactStrictMode: true,
 };
+
 export default nextConfig;
