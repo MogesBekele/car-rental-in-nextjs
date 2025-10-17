@@ -13,7 +13,6 @@ interface ApiResponse {
   message: string;
   car?: unknown;
 }
-
 const handler = nextConnect<NextApiRequestWithUser, NextApiResponse<ApiResponse>>({
   onError: (err, req, res) => {
     console.error('API Error:', err);
