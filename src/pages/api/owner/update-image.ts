@@ -19,7 +19,6 @@ const handler = nextConnect<NextApiRequestWithUser, NextApiResponse>({
 
 // Use multer middleware, field name is 'image'
 handler.use(upload.single("image"));
-
 handler.post(async (req, res) => {
   try {
     await connectDB();
