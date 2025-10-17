@@ -82,7 +82,6 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       toast.error("Failed to fetch user data");
     }
   };
-
   // ✅ Fetch cars
   const fetchCars = async () => {
     try {
