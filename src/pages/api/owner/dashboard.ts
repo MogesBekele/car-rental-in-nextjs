@@ -13,7 +13,6 @@ export default async function handler(
       .status(405)
       .json({ success: false, message: "Method Not Allowed" });
   }
-
   try {
     await connectDB();
     const authHeader = req.headers.authorization;

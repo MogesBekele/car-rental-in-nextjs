@@ -34,7 +34,6 @@ const handler = async (
     if (car.owner.toString() !== _id.toString()) {
       return res.status(401).json({ success: false, message: "Unauthorized" });
     }
-
     car.isAvailable = !car.isAvailable;
     await car.save();
     res.status(200).json({
