@@ -17,7 +17,6 @@ export interface ICar {
   createdAt?: Date;
   updatedAt?: Date;
 }
-
 const carSchema = new Schema<ICar>(
   {
     owner: { type: Schema.Types.ObjectId, ref: "User", required: false, default: null }, // <-- changed here
