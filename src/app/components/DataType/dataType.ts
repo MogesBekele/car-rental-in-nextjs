@@ -15,7 +15,6 @@ export type Car = {
   description: string;
   createdAt: string;
 };
-
 export type Booking = {
   _id: string;
   car: Car;
