@@ -30,8 +30,7 @@ const bookingSchema = new Schema<IBooking>(
     timestamps: true,
   }
 );
-
-// ✅ Prevent model overwrite in dev (Next.js HMR)
+//  Prevent model overwrite in dev (Next.js HMR)
 const Booking = models.Booking || mongoose.model<IBooking>("Booking", bookingSchema);
 
 export default Booking;
