@@ -14,7 +14,6 @@ export const metadata: Metadata = {
   title: "Car Rental",
   description: "Car rental app",
 };
-
 export default function RootLayout({
   children,
 }: {
