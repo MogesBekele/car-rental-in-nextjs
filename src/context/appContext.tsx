@@ -82,6 +82,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     }
   };
   // ✅ Fetch cars
+  
   const fetchCars = async () => {
     try {
       const { data } = await axios.get("/api/user/cars");
