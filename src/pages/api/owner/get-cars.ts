@@ -19,7 +19,6 @@ const handler = async (
       .status(405)
       .json({ success: false, message: "Method Not Allowed" });
   }
-
   try {
     const ownerId = req.user?._id;
     if (!ownerId) {
