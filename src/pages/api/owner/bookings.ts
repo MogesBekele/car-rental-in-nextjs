@@ -38,6 +38,5 @@ const getOwnerBookings = async (
       .json({ success: false, message: "Server error" });
   }
 };
-
 // Protect the route with middleware
 export default protect(getOwnerBookings);
