@@ -61,7 +61,6 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       ? ""
       : "http://localhost:3000";
 }
-
   // ✅ Fetch user data
   const fetchUser = async () => {
     if (!token) return;
