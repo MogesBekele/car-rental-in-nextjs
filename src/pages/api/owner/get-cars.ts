@@ -4,7 +4,6 @@ import type { NextApiRequestWithUser } from "@/types/nextApiRequestWithUser";
 import Car from "@/models/Car";
 import { protect } from "@/lib/auth";
 
-
 interface ApiResponse {
   success: boolean;
   cars?: unknown[];
