@@ -11,7 +11,7 @@ const geistMono = Geist_Mono({
 });
 export const metadata: Metadata = {
   title: "Car Rental",
-  description: "Car rental app",
+  description: "Car rental application",
 };
 export default function RootLayout({
   children,
